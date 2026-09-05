@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Passkeys in 2026: Are Passwords Finally Dying? | EEE
+    </title>
+
+    <meta name="description"
+          content="Passkeys are becoming a mainstream alternative to passwords. Learn how passkeys work, why they are more resistant to phishing, and whether you should switch.">
+
+    <meta name="keywords"
+          content="passkeys 2026, passkeys explained, passwordless authentication, passkeys vs passwords, cybersecurity, phishing protection, online security">
+
+    <meta name="author"
+          content="EEE — Evilelite Enterprises">
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #070707;
+            --surface: #101010;
+            --surface-light: #171717;
+            --text: #f5f5f5;
+            --muted: #929292;
+            --accent: #d7ff00;
+            --border: #252525;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1120px, 92%);
+            margin: auto;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: rgba(7, 7, 7, 0.94);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+        }
+
+        nav {
+            height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 900;
+            letter-spacing: 4px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .article-header {
+            padding: 100px 0 65px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-header-inner {
+            width: min(900px, 92%);
+            margin: auto;
+        }
+
+        .article-tag {
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .article-header h1 {
+            font-size: clamp(45px, 7vw, 78px);
+            line-height: 1.02;
+            letter-spacing: -4px;
+            max-width: 900px;
+        }
+
+        .subtitle {
+            margin-top: 28px;
+            max-width: 720px;
+            color: var(--muted);
+            font-size: 19px;
+            line-height: 1.7;
+        }
+
+        .meta {
+            margin-top: 25px;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .article {
+            width: min(800px, 92%);
+            margin: auto;
+            padding: 70px 0 100px;
+        }
+
+        .article p {
+            color: #c7c7c7;
+            font-size: 17px;
+            margin-bottom: 24px;
+        }
+
+        .article h2 {
+            font-size: 34px;
+            line-height: 1.2;
+            margin: 65px 0 22px;
+        }
+
+        .article h3 {
+            color: var(--accent);
+            font-size: 22px;
+            margin: 35px 0 12px;
+        }
+
+        .article ul {
+            margin: 20px 0 30px 25px;
+            color: #c7c7c7;
+        }
+
+        .article li {
+            margin-bottom: 13px;
+            font-size: 16px;
+        }
+
+        .highlight {
+            background: var(--surface);
+            border-left: 3px solid var(--accent);
+            padding: 24px 25px;
+            margin: 35px 0;
+            color: #ddd;
+        }
+
+        .highlight strong {
+            color: var(--accent);
+        }
+
+        .comparison {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 35px 0;
+            background: var(--surface);
+        }
+
+        .comparison th,
+        .comparison td {
+            border: 1px solid var(--border);
+            padding: 16px;
+            text-align: left;
+        }
+
+        .comparison th {
+            color: var(--accent);
+            font-size: 14px;
+        }
+
+        .comparison td {
+            color: #c7c7c7;
+            font-size: 15px;
+        }
+
+        .number {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .warning {
+            background: #111;
+            border: 1px solid #292929;
+            padding: 25px;
+            margin: 35px 0;
+        }
+
+        .warning strong {
+            color: var(--accent);
+        }
+
+        .sources {
+            border-top: 1px solid var(--border);
+            margin-top: 70px;
+            padding-top: 30px;
+        }
+
+        .sources h2 {
+            margin-top: 0;
+            font-size: 26px;
+        }
+
+        .sources p {
+            font-size: 14px;
+            color: #777;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 35px 0;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 700px) {
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .article-header {
+                padding: 70px 0 50px;
+            }
+
+            .article-header h1 {
+                letter-spacing: -2px;
+            }
+
+            .article {
+                padding-top: 50px;
+            }
+
+            .article h2 {
+                font-size: 28px;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .nav-links a:nth-child(2),
+            .nav-links a:nth-child(3) {
+                display: none;
+            }
+
+            .article-header h1 {
+                font-size: 45px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="container">
+
+        <nav>
+
+            <a href="index.html" class="logo">
+                E<span>3</span>
+            </a>
+
+            <div class="nav-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="index.html#articles">
+                    Articles
+                </a>
+
+                <a href="index.html#about">
+                    About
+                </a>
+
+            </div>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<section class="article-header">
+
+    <div class="article-header-inner">
+
+        <div class="article-tag">
+            Technology & Cybersecurity
+        </div>
+
+        <h1>
+            Passkeys in 2026: Are Passwords Finally Dying?
+        </h1>
+
+        <p class="subtitle">
+            Passwords have protected online accounts for decades.
+            Passkeys are now offering a different approach to authentication.
+            Here's what they are, how they work and whether you should use them.
+        </p>
+
+        <div class="meta">
+            September 2026 · EEE — Evilelite Enterprises
+        </div>
+
+    </div>
+
+</section>
+
+
+<main class="article">
+
+
+    <p>
+        Think about how many passwords you have used during your life.
+    </p>
+
+    <p>
+        Email accounts. Social media. Banking. Shopping. Work applications.
+        Cloud storage. Streaming services.
+    </p>
+
+    <p>
+        Every account traditionally required another secret that you had to
+        remember, protect and occasionally reset.
+    </p>
+
+    <p>
+        The problem is that passwords are difficult for humans to manage securely.
+    </p>
+
+    <p>
+        That is why the technology industry has been working toward a different
+        approach: <strong>passkeys</strong>.
+    </p>
+
+
+    <div class="highlight">
+
+        <strong>
+            Passkeys replace the traditional password with a cryptographic
+            credential that can be unlocked using the security of your device.
+        </strong>
+
+    </div>
+
+
+    <h2>
+        What Is a Passkey?
+    </h2>
+
+    <p>
+        A passkey is a passwordless sign-in credential based on public-key
+        cryptography and the FIDO authentication standards.
+    </p>
+
+    <p>
+        When you create a passkey, your device generates a cryptographic
+        key pair.
+    </p>
+
+    <p>
+        The private key remains protected by the credential system on your
+        device or passkey provider, while the service receives the corresponding
+        public key.
+    </p>
+
+    <p>
+        When you sign in later, the service can verify that you possess the
+        correct credential without asking you to type a traditional password.
+    </p>
+
+
+    <h2>
+        Why Do Passkeys Exist?
+    </h2>
+
+    <p>
+        Passwords have several fundamental weaknesses.
+    </p>
+
+    <ul>
+
+        <li>
+            People reuse passwords across multiple accounts.
+        </li>
+
+        <li>
+            Passwords can be stolen through phishing.
+        </li>
+
+        <li>
+            Password databases can be compromised.
+        </li>
+
+        <li>
+            Users forget passwords and need recovery processes.
+        </li>
+
+        <li>
+            Password reset systems can become another attack surface.
+        </li>
+
+    </ul>
+
+    <p>
+        Adding multi-factor authentication can improve security, but many
+        common second factors can still be targeted by phishing.
+    </p>
+
+    <p>
+        Passkeys were designed to address these problems at the authentication
+        level rather than simply adding another layer on top of passwords.
+    </p>
+
+
+    <h2>
+        Passkeys vs Passwords
+    </h2>
+
+
+    <table class="comparison">
+
+        <tr>
+
+            <th>
+                Passwords
+            </th>
+
+            <th>
+                Passkeys
+            </th>
+
+        </tr>
+
+        <tr>
+
+            <td>
+                User creates and remembers a secret
+            </td>
+
+            <td>
+                Cryptographic credential is created by the device
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>
+                Can be typed into a fake website
+            </td>
+
+            <td>
+                Designed to resist phishing
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>
+                Often reused
+            </td>
+
+            <td>
+                Credential is tied to the specific service
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>
+                Frequently requires password resets
+            </td>
+
+            <td>
+                No traditional password to remember
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <h2>
+        How Does a Passkey Work?
+    </h2>
+
+    <p>
+        The process sounds complicated, but using one is usually simple.
+    </p>
+
+    <h3>
+        Step 1 — Create the passkey
+    </h3>
+
+    <p>
+        A website or application asks whether you want to create a passkey.
+        Your device then generates the necessary cryptographic credentials.
+    </p>
+
+    <h3>
+        Step 2 — Verify yourself
+    </h3>
+
+    <p>
+        Depending on your device and configuration, you may use a fingerprint,
+        face recognition, device PIN or another supported method.
+    </p>
+
+    <h3>
+        Step 3 — Sign in later
+    </h3>
+
+    <p>
+        When you return to the website, your device can use the passkey to
+        authenticate you without requiring you to type a password.
+    </p>
+
+
+    <h2>
+        Why Passkeys Are Harder to Phish
+    </h2>
+
+    <p>
+        This is probably the most important security advantage.
+    </p>
+
+    <p>
+        A traditional password is something a user can accidentally type into
+        a fake website.
+    </p>
+
+    <p>
+        A properly implemented passkey does not work that way. The cryptographic
+        credential is associated with the legitimate service and authentication
+        process rather than being a secret that the user manually types into
+        any webpage.
+    </p>
+
+    <p>
+        The UK's National Cyber Security Centre assessed FIDO2 credentials,
+        including passkeys, as at least as secure as traditional MFA against
+        common credential attacks and said it plans to recommend passkeys where
+        services support them.
+    </p>
+
+
+    <div class="highlight">
+
+        <strong>
+            The biggest change isn't that passkeys are easier to remember.
+            It's that there is nothing for you to remember in the first place.
+        </strong>
+
+    </div>
+
+
+    <h2>
+        What Happens If You Lose Your Phone?
+    </h2>
+
+    <p>
+        This is one of the most common questions about passkeys.
+    </p>
+
+    <p>
+        The answer depends on how the passkey is managed.
+    </p>
+
+    <p>
+        Many passkey providers synchronize passkeys between a user's devices
+        using protected systems. This can make moving to a new device much
+        easier than recovering dozens of forgotten passwords.
+    </p>
+
+    <p>
+        Hardware security keys can also be used for users who want a
+        device-based credential that is separate from their normal phone.
+    </p>
+
+    <p>
+        However, account recovery still matters. A good authentication system
+        needs a secure recovery process for situations such as device loss,
+        account takeover or changes between ecosystems.
+    </p>
+
+
+    <h2>
+        Are Passkeys Completely Safe?
+    </h2>
+
+    <p>
+        No security technology should be described as completely safe.
+    </p>
+
+    <p>
+        Passkeys significantly reduce important classes of credential attacks,
+        but the surrounding account and recovery system still matters.
+    </p>
+
+    <p>
+        Attackers can still target users through malware, stolen devices,
+        compromised accounts, social engineering and other techniques.
+    </p>
+
+    <div class="warning">
+
+        <strong>
+            Passkeys reduce the risk of password-based attacks.
+        </strong>
+
+        <br><br>
+
+        They do not make every part of your digital life automatically secure.
+
+    </div>
+
+
+    <h2>
+        Are Passkeys Actually Becoming Mainstream?
+    </h2>
+
+    <p>
+        The answer in 2026 appears to be yes.
+    </p>
+
+    <p>
+        The FIDO Alliance's 2026 global research estimates that approximately
+        5 billion passkeys are now in active use worldwide.
+    </p>
+
+    <p>
+        Its research also found that 90% of surveyed consumers were familiar
+        with passkeys and 75% had enabled a passkey on at least one account.
+    </p>
+
+    <p>
+        Among organizations surveyed, 68% were deploying, piloting or rolling
+        out passkeys for employee authentication.
+    </p>
+
+    <p>
+        That does not mean passwords are disappearing tomorrow.
+    </p>
+
+    <p>
+        Many services still support passwords, and organizations continue to
+        deal with legacy systems, recovery requirements and user adoption.
+    </p>
+
+
+    <h2>
+        Why Passwords Aren't Dead Yet
+    </h2>
+
+    <p>
+        Passkeys are growing rapidly, but replacing passwords across the entire
+        internet is a massive transition.
+    </p>
+
+    <p>
+        Some websites do not support passkeys yet.
+    </p>
+
+    <p>
+        Some users are unfamiliar with the technology.
+    </p>
+
+    <p>
+        Organizations also have older applications and authentication systems
+        that cannot simply be replaced overnight.
+    </p>
+
+    <p>
+        The likely future is therefore not an instant switch.
+    </p>
+
+    <p>
+        Instead, passwords and passkeys will coexist while more services
+        gradually make passkeys the preferred option.
+    </p>
+
+
+    <h2>
+        Should You Start Using Passkeys?
+    </h2>
+
+    <p>
+        If an important service you use offers a passkey, there is a strong
+        reason to consider enabling it.
+    </p>
+
+    <p>
+        Start with your most important accounts.
+    </p>
+
+    <ul>
+
+        <li>
+            Primary email
+        </li>
+
+        <li>
+            Major cloud accounts
+        </li>
+
+        <li>
+            Financial services that support passkeys
+        </li>
+
+        <li>
+            Important work accounts
+        </li>
+
+        <li>
+            Developer and technology accounts
+        </li>
+
+    </ul>
+
+    <p>
+        Keep your devices protected, maintain appropriate recovery options,
+        and make sure you understand how your chosen passkey provider handles
+        synchronization and account recovery.
+    </p>
+
+
+    <h2>
+        The Bottom Line
+    </h2>
+
+    <p>
+        Passwords have been around for a very long time because they are simple.
+    </p>
+
+    <p>
+        But simplicity for the website does not always mean simplicity or
+        security for the user.
+    </p>
+
+    <p>
+        Passkeys represent a fundamental change in authentication:
+        instead of asking users to remember increasingly complicated secrets,
+        the technology can use cryptographic credentials protected by the
+        devices people already use.
+    </p>
+
+    <p>
+        They aren't perfect, and passwords aren't disappearing overnight.
+    </p>
+
+    <p>
+        But with billions of passkeys now in use and major technology
+        organizations supporting the standard, this is no longer an experimental
+        idea sitting on the sidelines.
+    </p>
+
+    <div class="highlight">
+
+        <strong>
+            Passwords may not disappear tomorrow.
+            But the internet is clearly building a future where you need
+            fewer of them.
+        </strong>
+
+    </div>
+
+
+    <div class="sources">
+
+        <h2>
+            Sources & Further Reading
+        </h2>
+
+        <p>
+            This article was researched using 2026 information from the
+            FIDO Alliance and the UK's National Cyber Security Centre.
+        </p>
+
+        <p>
+            Authentication technologies and supported services can change over
+            time. Check the security and account-recovery documentation provided
+            by the relevant service before changing your authentication method.
+        </p>
+
+    </div>
+
+
+</main>
+
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div>
+                © 2026 EEE — Evilelite Enterprises
+            </div>
+
+            <div>
+                Technology • AI • Trading
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>
